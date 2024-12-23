@@ -299,11 +299,178 @@ cities = ["New York City", "Los Angeles", "Chicago", "Mountain View", "Denver", 
 short_cities = list(filter(lambda x: len(x) < 10, cities))
 print(short_cities)
 
+"""
+
 # Aspect	map()	filter()
 # Purpose	Transforms each element in an iterable	Filters elements based on a condition
 # Function Argument	Takes a function that operates on one or more elements	Takes a function that returns a boolean (True/False)
 # Result	A new iterable with transformed elements	A new iterable with elements that satisfy the condition
 # Return Type	Map object (iterator)	Filter object (iterator)
 # When to Use	When you want to apply a transformation to each element	When you want to keep only elements that satisfy a condition
+
+"""
+input
+name = input("who's there")
+print(f"hello there {name}")
+
+#eval --> it is a built in function used to evaluate a string as an expression
+num = eval(input("enter expression :"))
+print(f"{num}")
+
+print("concatination")
+global_var = input("for global variable")
+local_var = input("for local variable")
+expression = "global_var + local_var"
+
+result = eval(expression, {"global_var": global_var}, {"local_var": local_var})
+print(result)
+
+#quiz1
+
+names = list(input("enter names seprated by commas").title().split(","))
+assignments = list(input("enter subject names seprated by commas").split(","))
+grades = list(input("enter grades seprated by commas").title().split(","))
+
+message = "Hi {},\n\nThis is a reminder that you have {} assignments left to \
+submit before you can graduate. You're current grade is {} and can increase \
+to {} if you submit all assignments before the due date.\n\n"
+
+for name, assignment, grade in zip(names, assignments, grades):
+    print(message.format(name, assignment, grade, int(grade) + int(assignment)*2))
+"""
+
+"""
+##exception
+#x = int(input("enter a number\n"))# if we give any other datatype it will give valueError
+
+# so use it with a try except block
+# try:                                    #try 
+#     x = int(input("enter a number\n")) #if any error
+# except:                                 #work according to the error condition
+#     print("valueError")
+
+# print("end of program")
+# list1 = []
+# while True:
+#     user_input = input("Enter a number to store or type 'exit' to print the list of numbers given: ")
+
+#     if user_input.lower() == 'exit':
+#         print("Numbers entered are:")
+#         print(list1)
+#         break
+#     else:
+#         try:
+#             x = int(user_input)
+#             list1.append(x)
+#         except ValueError :#but now it will only handle valueError not other errors
+#             print("Invalid input! Please enter a valid number or 'exit'.")
+#         finally:#this line will always execute weather it is a error or try block execution
+#             print("number stored")
+
+
+# divisor = 10
+# try:
+#     x = int(input("enter number \n"))
+#     print(divisor/x)
+# except ZeroDivisionError as e:#accessing error message
+#     print(f"ZeroDivisionError : {e}")
+
+
+#file operations(more in basicAC.py)
+
+# f = open("demo.txt","r")
+# file_data = f.read()
+# print(file_data)
+# f.close()
+
+#testing how much file can be opened
+
+# files = []
+
+# for i in range(1000000000):
+#     files.append(open("demo.txt","r"))
+#     print(i)
+#     files[i].close()
+
+
+# with open("demo.txt","r") as f:#this method will automatically close the file and the opened in this block can't be accessed outside the block
+#     file_data = f.read()#but this variable can be accessed outside the block
+
+# print(file_data)
+
+#import other files to the current file
+
+# import other_scripts
+# import other_scripts as uf # or use alias
+
+# print(uf.num)#accessing other files variables
+# print(type(uf))#type module
+
+# list1 = list(range(1,11))
+
+# #using functions
+# print(uf.mean(list1))
+# print(uf.even_num(list1))
+
+# print(__name__)
+# print(uf.__name__)
+
+#importing modules
+# import math 
+
+# num = math.pow(2,3)
+# print(num)
+
+#importing some functions or definations from its module
+# from math import exp,pow,sumprod(we can use modules function without dot{.})
+# print(exp(3))
+# we can also give them alias
+# from math import exp as mathExp
+# print(mathExp(3))
+
+#try to not use from module_Name import * --> because it can overwrite other definations defined by the user.so use the module with . notation
+
+# Iterator --> An object that represents stream of data;
+# Generator --> A function that creates an iterator;
+# yield --> yield keyword is used to turn a function into a generator. A generator is a special type of iterator that allows
+#           you to iterate over a potentially large sequence of values lazily, meaning that it produces items one by one only when requested,
+#           rather than computing and storing all items at once. This can help save memory and improve performance, especially with large
+#           datasets or long sequences.
+
+def my_range(n):
+    i = 0
+    while i < n:
+        yield i #it returns the current value of i
+        i += 1 #after calling the function again where yield is present
+
+
+for i in my_range(5):
+    print(i)
+
+print(type(my_range(1)))#generator class
+
+# example 1
+lessons = ["Why Python Programming", "Data Types and Operators", "Control Flow", "Functions", "Scripting"]
+
+def my_enumerate(iterable, start=0):
+    # Implement your generator function here
+    count = start
+    for el in iterable:
+        yield count,el
+        count += 1
+
+
+for i, lesson in my_enumerate(lessons, 1):
+    print("Lesson {}: {}".format(i, lesson))
+
+# example 2
+def chunker(iterable, size):
+    # Implement function here
+    for el in range(0,len(iterable),size):
+        yield iterable[el:el+size]
+
+
+for chunk in chunker(range(25), 4):
+    print(list(chunk))
 
 """
